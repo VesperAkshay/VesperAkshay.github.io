@@ -17,7 +17,6 @@ const App: React.FC = () => {
           <Hero />
           <Gallery />
           <Stack />
-          <Contact />
         </main>
         <Footer />
         <CustomCursor />

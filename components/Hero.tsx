@@ -1,6 +1,11 @@
 import React from 'react';
 
 const Hero: React.FC = () => {
+  const handleInitialize = () => {
+    window.scrollTo(0, 0);
+    window.location.reload();
+  };
+
   return (
     <section className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-slate-900 text-slate-50">
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
@@ -18,7 +23,10 @@ const Hero: React.FC = () => {
           Systems that perceive, reason, and execute.
         </p>
 
-        <button className="mt-12 px-8 py-4 bg-white text-black font-bold text-lg rounded-full hover:scale-105 transition-transform duration-300 font-mono">
+        <button
+          onClick={handleInitialize}
+          className="mt-12 px-8 py-4 bg-white text-black font-bold text-lg rounded-full hover:scale-105 transition-transform duration-300 font-mono"
+        >
           INITIALIZE PROTOCOL
         </button>
       </div>

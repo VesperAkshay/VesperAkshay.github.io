@@ -96,67 +96,79 @@ const IdCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           transformStyle: 'preserve-3d'
         }}
         className={`
-          relative w-80 h-80 bg-slate-900 border transition-colors duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
-          group cursor-none z-10 select-none
-          ${isOpen ? 'border-emerald-500/50' : 'border-slate-700 hover:border-slate-500'}
+          relative w-96 h-[28rem] transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+          group cursor-none z-10 select-none rounded-3xl shadow-2xl
+          ${isOpen ? 'border-emerald-500/30' : 'border-white/10 hover:border-white/20'}
         `}
       >
         {/* Dynamic Shadow for floating effect */}
         <div
-          className={`absolute -inset-4 bg-emerald-500/20 blur-2xl transition-opacity duration-300 -z-10 rounded-full
-            ${isOpen ? 'opacity-40' : 'opacity-0 group-hover:opacity-20'}`}
+          className={`absolute -inset-4 bg-emerald-500/20 blur-3xl transition-opacity duration-500 -z-10 rounded-full
+            ${isOpen ? 'opacity-30' : 'opacity-0 group-hover:opacity-10'}`}
         />
 
-        {/* Tech decoration corners */}
-        <div className={`absolute top-0 left-0 w-3 h-3 border-t border-l transition-colors duration-300 ${isOpen ? 'border-emerald-500' : 'border-slate-500'}`} />
-        <div className={`absolute top-0 right-0 w-3 h-3 border-t border-r transition-colors duration-300 ${isOpen ? 'border-emerald-500' : 'border-slate-500'}`} />
-        <div className={`absolute bottom-0 left-0 w-3 h-3 border-b border-l transition-colors duration-300 ${isOpen ? 'border-emerald-500' : 'border-slate-500'}`} />
-        <div className={`absolute bottom-0 right-0 w-3 h-3 border-b border-r transition-colors duration-300 ${isOpen ? 'border-emerald-500' : 'border-slate-500'}`} />
+        {/* Tech decoration corners - Updated for rounded design */}
+        <div className={`absolute top-6 left-6 w-8 h-[1px] transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
+        <div className={`absolute top-6 left-6 w-[1px] h-8 transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
+        
+        <div className={`absolute bottom-6 right-6 w-8 h-[1px] transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
+        <div className={`absolute bottom-6 right-6 w-[1px] h-8 transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
 
         {/* Default State: Photo & Info */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 [backface-visibility:hidden]">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-slate-600 mb-6 relative group-hover:border-slate-400 transition-colors shadow-inner">
+        <div 
+            className="absolute inset-0 flex flex-col items-center justify-center p-8 rounded-3xl bg-slate-900/40 backdrop-blur-xl border border-white/5"
+            style={{ backfaceVisibility: 'hidden' }}
+        >
+          <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-slate-800/50 mb-8 relative group-hover:border-slate-700/50 transition-all duration-500 shadow-2xl group-hover:scale-105">
             <img
               src="/profile.png"
               alt="Profile"
-              className="w-full h-full object-cover contrast-125"
+              className="w-full h-full object-cover contrast-110 saturate-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
 
-          <div className="text-center space-y-2">
-            <h3 className="text-2xl font-bold tracking-tighter text-white drop-shadow-lg">Akshay Patel</h3>
-            <div className="h-px w-12 bg-slate-700 mx-auto" />
-            <p className="text-xs text-slate-400 tracking-widest uppercase">Software Engineer</p>
+          <div className="text-center space-y-3">
+            <h3 className="text-3xl font-bold tracking-tight text-white drop-shadow-lg">Akshay Patel</h3>
+            <div className="flex items-center justify-center gap-3">
+                <div className="h-[1px] w-8 bg-gradient-to-r from-transparent to-emerald-500/50" />
+                <p className="text-xs text-emerald-400/80 tracking-[0.2em] uppercase font-medium">Software Engineer</p>
+                <div className="h-[1px] w-8 bg-gradient-to-l from-transparent to-emerald-500/50" />
+            </div>
           </div>
 
-          <div className="mt-8 text-[10px] text-slate-600 tracking-[0.2em] animate-pulse">
-            [ CLICK TO DECRYPT ]
+          <div className="mt-12 flex items-center gap-2 text-[10px] text-slate-500 tracking-[0.2em] animate-pulse border border-white/5 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+            ACCESS GRANTED
           </div>
         </div>
 
         {/* Active State: Links Grid */}
-        <div className="absolute inset-0 grid grid-cols-2 p-1 gap-1 bg-slate-900/95 backdrop-blur-sm [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div 
+            className="absolute inset-0 grid grid-cols-2 p-4 gap-3 bg-slate-950/90 backdrop-blur-2xl rounded-3xl border border-emerald-500/20"
+            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+        >
           {[
-            { label: 'GITHUB', Icon: Icons.Github, href: 'https://github.com/VesperAkshay', bg: 'hover:bg-slate-800' },
-            { label: 'TWITTER', Icon: Icons.Twitter, href: 'https://x.com/Akshaypatell_', bg: 'hover:bg-slate-800' },
-            { label: 'LINKEDIN', Icon: Icons.LinkedIn, href: 'https://www.linkedin.com/in/patelakshay1503', bg: 'hover:bg-slate-800' },
-            { label: 'EMAIL', Icon: Icons.Mail, href: 'mailto:contact@example.com', bg: 'hover:bg-slate-800' },
-            { label: 'HUGGINGFACE', Icon: Icons.HuggingFace, href: '#', bg: 'hover:bg-slate-800' },
-            { label: 'DISCORD', Icon: Icons.Discord, href: '#', bg: 'hover:bg-slate-800' },
+            { label: 'GITHUB', Icon: Icons.Github, href: 'https://github.com/VesperAkshay', bg: 'hover:bg-white/5 hover:border-white/10' },
+            { label: 'TWITTER', Icon: Icons.Twitter, href: 'https://x.com/Akshaypatell_', bg: 'hover:bg-sky-500/10 hover:border-sky-500/20 hover:text-sky-400' },
+            { label: 'LINKEDIN', Icon: Icons.LinkedIn, href: 'https://www.linkedin.com/in/patelakshay1503', bg: 'hover:bg-blue-600/10 hover:border-blue-500/20 hover:text-blue-400' },
+            { label: 'EMAIL', Icon: Icons.Mail, href: 'mailto:contact@example.com', bg: 'hover:bg-emerald-500/10 hover:border-emerald-500/20 hover:text-emerald-400' },
+            { label: 'HUGGINGFACE', Icon: Icons.HuggingFace, href: '#', bg: 'hover:bg-yellow-500/10 hover:border-yellow-500/20 hover:text-yellow-400' },
+            { label: 'DISCORD', Icon: Icons.Discord, href: '#', bg: 'hover:bg-indigo-500/10 hover:border-indigo-500/20 hover:text-indigo-400' },
           ].map((link) => (
             <a
               key={link.label}
               href={link.href}
               className={`
-                    flex flex-col items-center justify-center border border-slate-800/50
-                    text-slate-400 transition-all duration-300 group/link ${link.bg} hover:scale-105 cursor-none
+                    flex flex-col items-center justify-center border border-white/5 rounded-2xl
+                    text-slate-400 transition-all duration-300 group/link ${link.bg} hover:scale-[1.02] cursor-none
+                    bg-white/[0.02] backdrop-blur-sm
                   `}
               onClick={(e) => e.stopPropagation()}
               onMouseEnter={(e) => { e.stopPropagation(); setCursorVariant('button'); }}
               onMouseLeave={(e) => { e.stopPropagation(); setCursorVariant('default'); }}
             >
-              <div className="mb-2 text-slate-600 group-hover/link:text-emerald-400 transition-colors transform group-hover/link:scale-110 duration-300">
+              <div className="mb-3 text-slate-500 group-hover/link:text-current transition-colors transform group-hover/link:scale-110 duration-300">
                 <link.Icon />
               </div>
               <span className="text-[10px] tracking-widest font-bold group-hover/link:text-white transition-colors">

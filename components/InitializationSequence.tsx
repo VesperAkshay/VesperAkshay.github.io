@@ -30,55 +30,64 @@ const Logos = {
 // 3D Rotating Core Component
 const AgentCore: React.FC = () => {
     return (
-        <div className="relative w-64 h-64 flex items-center justify-center perspective-1000">
-            <div className="relative w-32 h-32 transform-style-3d animate-rotate-3d">
-                {/* Core Cube / Tesseract Simulation */}
-                <div className="absolute inset-0 border border-slate-400/30 bg-slate-800/20 translate-z-16 backdrop-blur-sm"></div>
-                <div className="absolute inset-0 border border-slate-400/30 bg-slate-800/20 -translate-z-16 backdrop-blur-sm"></div>
-                <div className="absolute inset-0 border border-slate-400/30 bg-slate-800/20 rotate-y-90 translate-z-16 backdrop-blur-sm"></div>
-                <div className="absolute inset-0 border border-slate-400/30 bg-slate-800/20 rotate-y-90 -translate-z-16 backdrop-blur-sm"></div>
-                <div className="absolute inset-0 border border-slate-400/30 bg-slate-800/20 rotate-x-90 translate-z-16 backdrop-blur-sm"></div>
-                <div className="absolute inset-0 border border-slate-400/30 bg-slate-800/20 rotate-x-90 -translate-z-16 backdrop-blur-sm"></div>
+        <div className="relative w-80 h-80 flex items-center justify-center perspective-1000">
+            {/* Central Workflow Engine (Gyroscope) */}
+            <div className="relative w-40 h-40 transform-style-3d">
+                {/* Inner Core (The 'Brain') */}
+                <div className="absolute inset-0 m-auto w-12 h-12 bg-white rounded-full shadow-[0_0_40px_rgba(255,255,255,0.8)] animate-pulse z-20"></div>
 
-                {/* Inner Glowing Core */}
-                <div className="absolute top-1/2 left-1/2 w-12 h-12 -mt-6 -ml-6 bg-white rounded-full shadow-[0_0_50px_rgba(255,255,255,0.8)] animate-pulse"></div>
+                {/* Ring 1 - Vertical */}
+                <div className="absolute inset-0 border-[3px] border-slate-500/30 rounded-full animate-spin-y transform-style-3d">
+                    <div className="absolute top-0 left-1/2 w-3 h-3 -ml-1.5 -mt-1.5 bg-emerald-400 rounded-full shadow-[0_0_10px_#10b981]"></div>
+                </div>
+
+                {/* Ring 2 - Horizontal */}
+                <div className="absolute inset-0 border-[3px] border-slate-500/30 rounded-full animate-spin-x transform-style-3d">
+                    <div className="absolute left-0 top-1/2 w-3 h-3 -ml-1.5 -mt-1.5 bg-emerald-400 rounded-full shadow-[0_0_10px_#10b981]"></div>
+                </div>
+
+                {/* Ring 3 - Diagonal */}
+                <div className="absolute inset-0 border-[3px] border-slate-500/30 rounded-full animate-spin-z transform-style-3d">
+                    <div className="absolute bottom-0 left-1/2 w-3 h-3 -ml-1.5 -mb-1.5 bg-emerald-400 rounded-full shadow-[0_0_10px_#10b981]"></div>
+                </div>
             </div>
 
-            {/* Orbiting Agent Nodes */}
+            {/* Connected Agent Nodes */}
             <div className="absolute inset-0 animate-spin-slow">
-                {/* Node 1: Gemini */}
-                <div className="absolute top-0 left-1/2 w-12 h-12 -ml-6 -mt-6 bg-slate-900 border border-slate-600 rounded-full p-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform">
-                    <div className="text-white w-full h-full"><Logos.Gemini /></div>
-                </div>
-
-                {/* Node 2: OpenAI */}
-                <div className="absolute bottom-0 left-1/2 w-12 h-12 -ml-6 -mb-6 bg-slate-900 border border-slate-600 rounded-full p-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform">
-                    <div className="text-white w-full h-full"><Logos.OpenAI /></div>
-                </div>
-
-                {/* Node 3: Anthropic */}
-                <div className="absolute left-0 top-1/2 w-12 h-12 -ml-6 -mt-6 bg-slate-900 border border-slate-600 rounded-full p-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform">
-                    <div className="text-white w-full h-full"><Logos.Anthropic /></div>
-                </div>
-
-                {/* Node 4: Grok */}
-                <div className="absolute right-0 top-1/2 w-12 h-12 -mr-6 -mt-6 bg-slate-900 border border-slate-600 rounded-full p-2 shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform">
-                    <div className="text-white w-full h-full"><Logos.Grok /></div>
-                </div>
-
-                {/* Connecting Lines */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none -z-10">
-                    <line x1="50%" y1="50%" x2="50%" y2="0%" stroke="rgba(148, 163, 184, 0.3)" strokeWidth="1" strokeDasharray="5,5" />
-                    <line x1="50%" y1="50%" x2="50%" y2="100%" stroke="rgba(148, 163, 184, 0.3)" strokeWidth="1" strokeDasharray="5,5" />
-                    <line x1="50%" y1="50%" x2="0%" y2="50%" stroke="rgba(148, 163, 184, 0.3)" strokeWidth="1" strokeDasharray="5,5" />
-                    <line x1="50%" y1="50%" x2="100%" y2="50%" stroke="rgba(148, 163, 184, 0.3)" strokeWidth="1" strokeDasharray="5,5" />
+                    {/* Dashed lines connecting nodes to center */}
+                    <line x1="50%" y1="50%" x2="50%" y2="5%" stroke="rgba(16, 185, 129, 0.3)" strokeWidth="2" strokeDasharray="4,4" />
+                    <line x1="50%" y1="50%" x2="50%" y2="95%" stroke="rgba(16, 185, 129, 0.3)" strokeWidth="2" strokeDasharray="4,4" />
+                    <line x1="50%" y1="50%" x2="5%" y2="50%" stroke="rgba(16, 185, 129, 0.3)" strokeWidth="2" strokeDasharray="4,4" />
+                    <line x1="50%" y1="50%" x2="95%" y2="50%" stroke="rgba(16, 185, 129, 0.3)" strokeWidth="2" strokeDasharray="4,4" />
+
+                    {/* Orbit ring */}
+                    <circle cx="50%" cy="50%" r="45%" fill="none" stroke="rgba(148, 163, 184, 0.1)" strokeWidth="1" />
                 </svg>
+
+                {/* Nodes positioned at the ends of the lines */}
+                {/* Top */}
+                <div className="absolute top-[5%] left-1/2 w-14 h-14 -ml-7 -mt-7 bg-slate-900/90 border border-emerald-500/50 rounded-xl p-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform backdrop-blur-md">
+                    <div className="w-full h-full"><Logos.Gemini /></div>
+                </div>
+                {/* Bottom */}
+                <div className="absolute bottom-[5%] left-1/2 w-14 h-14 -ml-7 -mb-7 bg-slate-900/90 border border-emerald-500/50 rounded-xl p-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform backdrop-blur-md">
+                    <div className="w-full h-full"><Logos.OpenAI /></div>
+                </div>
+                {/* Left */}
+                <div className="absolute left-[5%] top-1/2 w-14 h-14 -ml-7 -mt-7 bg-slate-900/90 border border-emerald-500/50 rounded-xl p-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform backdrop-blur-md">
+                    <div className="w-full h-full"><Logos.Anthropic /></div>
+                </div>
+                {/* Right */}
+                <div className="absolute right-[5%] top-1/2 w-14 h-14 -mr-7 -mt-7 bg-slate-900/90 border border-emerald-500/50 rounded-xl p-3 shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center justify-center transform hover:scale-110 transition-transform backdrop-blur-md">
+                    <div className="w-full h-full"><Logos.Grok /></div>
+                </div>
             </div>
         </div>
     );
 };
 
-const MatrixBackground: React.FC = () => {
+const StarBackground: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
@@ -91,42 +100,54 @@ const MatrixBackground: React.FC = () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const chars = '01';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const rainDrops: number[] = Array(Math.ceil(columns)).fill(1);
+        const stars: { x: number; y: number; radius: number; speed: number; opacity: number }[] = [];
+        const numStars = 200;
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                speed: Math.random() * 0.2 + 0.05,
+                opacity: Math.random() * 0.8 + 0.2
+            });
+        }
 
         const draw = () => {
-            ctx.fillStyle = 'rgba(15, 23, 42, 0.1)'; // Slate-900 with opacity
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = '#94a3b8'; // Slate-400 text
-            ctx.font = fontSize + 'px monospace';
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+                ctx.fill();
 
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = chars.charAt(Math.floor(Math.random() * chars.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
+                star.y -= star.speed;
+                if (star.y < 0) {
+                    star.y = canvas.height;
+                    star.x = Math.random() * canvas.width;
                 }
-                rainDrops[i]++;
-            }
+            });
+
+            requestAnimationFrame(draw);
         };
 
-        const interval = setInterval(draw, 40);
+        const animationId = requestAnimationFrame(draw);
+
         const handleResize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         };
+
         window.addEventListener('resize', handleResize);
+
         return () => {
-            clearInterval(interval);
+            cancelAnimationFrame(animationId);
             window.removeEventListener('resize', handleResize);
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-20" />;
+    return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-40" />;
 };
 
 const InitializationSequence: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
@@ -167,7 +188,7 @@ const InitializationSequence: React.FC<{ onComplete: () => void }> = ({ onComple
         <div className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center font-mono text-slate-200 overflow-hidden perspective-1000">
 
             <div className={`relative w-full h-full flex flex-col items-center justify-center ${isShuttingDown ? 'animate-crt-off' : ''}`}>
-                <MatrixBackground />
+                <StarBackground />
                 <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle,transparent_30%,#020617_90%)] z-[2]"></div>
 
                 <div className="w-full max-w-4xl relative z-10 p-8 flex flex-col items-center gap-16">
@@ -210,13 +231,21 @@ const InitializationSequence: React.FC<{ onComplete: () => void }> = ({ onComple
         .rotate-y-90 { transform: rotateY(90deg); }
         .rotate-x-90 { transform: rotateX(90deg); }
         
-        @keyframes rotate-3d {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
+        @keyframes spin-x {
+            0% { transform: rotateX(0deg); }
+            100% { transform: rotateX(360deg); }
         }
-        .animate-rotate-3d {
-            animation: rotate-3d 12s linear infinite;
+        @keyframes spin-y {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
         }
+        @keyframes spin-z {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+        .animate-spin-x { animation: spin-x 8s linear infinite; }
+        .animate-spin-y { animation: spin-y 12s linear infinite; }
+        .animate-spin-z { animation: spin-z 15s linear infinite; }
         
         @keyframes spin-slow {
             from { transform: rotate(0deg); }

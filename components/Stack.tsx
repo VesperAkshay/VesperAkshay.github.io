@@ -115,7 +115,7 @@ const Stack: React.FC = () => {
                 </h3>
             </div>
 
-            <div ref={containerRef} className="relative w-full max-w-6xl h-[60vh] border border-slate-800/50 rounded-xl bg-slate-900/30 backdrop-blur-sm overflow-hidden mx-6">
+            <div ref={containerRef} className="relative w-full max-w-6xl h-[60vh] min-h-[400px] border border-slate-800/50 rounded-xl bg-slate-900/30 backdrop-blur-sm overflow-hidden mx-6">
 
                 {/* Connections (SVG Lines) */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none">

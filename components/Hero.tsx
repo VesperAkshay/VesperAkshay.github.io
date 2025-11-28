@@ -19,8 +19,8 @@ const Hero: React.FC = () => {
         </h1>
 
         <p className="mt-12 max-w-xl text-center text-slate-400 text-lg sm:text-xl font-light font-mono">
-          Architecting autonomous digital workers. <br />
-          Systems that perceive, reason, and execute.
+          Software Developer in AI.<br />
+          Architecting autonomous digital workers.
         </p>
 
         <button

@@ -110,19 +110,19 @@ const IdCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         {/* Tech decoration corners - Updated for rounded design */}
         <div className={`absolute top-6 left-6 w-8 h-[1px] transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
         <div className={`absolute top-6 left-6 w-[1px] h-8 transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
-        
+
         <div className={`absolute bottom-6 right-6 w-8 h-[1px] transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
         <div className={`absolute bottom-6 right-6 w-[1px] h-8 transition-colors duration-300 ${isOpen ? 'bg-emerald-500/50' : 'bg-white/10'} z-20`} />
 
         {/* Default State: Photo & Info */}
-        <div 
-            className="absolute inset-0 flex flex-col items-center justify-center p-8 rounded-3xl bg-slate-900/40 backdrop-blur-xl border border-white/5"
-            style={{ backfaceVisibility: 'hidden' }}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center p-8 rounded-3xl bg-slate-900/40 backdrop-blur-xl border border-white/5"
+          style={{ backfaceVisibility: 'hidden' }}
         >
           <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-slate-800/50 mb-8 relative group-hover:border-slate-700/50 transition-all duration-500 shadow-2xl group-hover:scale-105">
             <img
               src="/profile.png"
-              alt="Profile"
+              alt="Akshay Patel - Software Developer in AI"
               className="w-full h-full object-cover contrast-110 saturate-110"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -131,9 +131,9 @@ const IdCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <div className="text-center space-y-3">
             <h3 className="text-3xl font-bold tracking-tight text-white drop-shadow-lg">Akshay Patel</h3>
             <div className="flex items-center justify-center gap-3">
-                <div className="h-[1px] w-8 bg-gradient-to-r from-transparent to-emerald-500/50" />
-                <p className="text-xs text-emerald-400/80 tracking-[0.2em] uppercase font-medium">Software Engineer</p>
-                <div className="h-[1px] w-8 bg-gradient-to-l from-transparent to-emerald-500/50" />
+              <div className="h-[1px] w-8 bg-gradient-to-r from-transparent to-emerald-500/50" />
+              <p className="text-xs text-emerald-400/80 tracking-[0.2em] uppercase font-medium">Software Developer in AI</p>
+              <div className="h-[1px] w-8 bg-gradient-to-l from-transparent to-emerald-500/50" />
             </div>
           </div>
 
@@ -144,9 +144,9 @@ const IdCard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         </div>
 
         {/* Active State: Links Grid */}
-        <div 
-            className="absolute inset-0 grid grid-cols-2 p-4 gap-3 bg-slate-950/90 backdrop-blur-2xl rounded-3xl border border-emerald-500/20"
-            style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+        <div
+          className="absolute inset-0 grid grid-cols-2 p-4 gap-3 bg-slate-950/90 backdrop-blur-2xl rounded-3xl border border-emerald-500/20"
+          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
         >
           {[
             { label: 'GITHUB', Icon: Icons.Github, href: 'https://github.com/VesperAkshay', bg: 'hover:bg-white/5 hover:border-white/10' },

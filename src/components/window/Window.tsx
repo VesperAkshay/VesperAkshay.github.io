@@ -129,10 +129,14 @@ export const Window: React.FC<WindowProps> = ({
       style={{
         zIndex,
         position: 'absolute',
-        top: isMaximized ? 4 : position.y,
-        left: isMaximized ? 8 : position.x,
+        top: isMaximized ? 4 : Math.max(4, Math.min(position.y, (typeof window !== 'undefined' ? window.innerHeight : 900) - 100)),
+        left: isMaximized ? 8 : Math.max(4, Math.min(position.x, (typeof window !== 'undefined' ? window.innerWidth : 1200) - 100)),
         width: isMaximized ? 'calc(100% - 16px)' : `${size.width}px`,
         height: isMaximized ? 'calc(100% - 76px)' : `${size.height}px`,
+        maxWidth: 'calc(100vw - 16px)',
+        maxHeight: 'calc(100vh - 80px)',
+        minWidth: `${Math.min(minSize.width, typeof window !== 'undefined' ? window.innerWidth - 20 : 320)}px`,
+        minHeight: `${minSize.height}px`,
         willChange: isDragging || isResizing ? 'transform' : 'auto',
       }}
       className={`rounded-window overflow-hidden flex flex-col transition-shadow duration-200 select-none ${

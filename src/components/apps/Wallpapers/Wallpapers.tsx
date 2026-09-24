@@ -100,11 +100,28 @@ export const Wallpapers = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search wallpapers..."
-              className="w-36 sm:w-52 pl-8 pr-2.5 py-1 text-xs rounded-lg bg-slate-200/60 dark:bg-slate-800/80 border border-transparent focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white placeholder:text-slate-400"
+              placeholder="Search..."
+              className="w-32 sm:w-52 pl-8 pr-2.5 py-1 text-xs rounded-lg bg-slate-200/60 dark:bg-slate-800/80 border border-transparent focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-slate-900 dark:text-white placeholder:text-slate-400"
             />
           </div>
         </header>
+
+        {/* Mobile Horizontal Category Filter Bar */}
+        <div className="flex sm:hidden items-center gap-1.5 px-3 py-2 overflow-x-auto border-b border-black/5 dark:border-white/10 shrink-0 bg-white/20 dark:bg-black/20 scrollbar-none">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-2.5 py-1 rounded-full text-[11px] whitespace-nowrap transition-colors shrink-0 ${
+                selectedCategory === cat
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                  : 'bg-black/5 dark:bg-white/5 text-slate-700 dark:text-slate-300 hover:bg-black/10'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
         {/* Wallpaper Grid */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-5">

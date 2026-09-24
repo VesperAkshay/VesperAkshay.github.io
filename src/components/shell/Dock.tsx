@@ -68,12 +68,12 @@ export const Dock = () => {
   }))
 
   return (
-    <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 z-40">
+    <div className="absolute bottom-2 sm:bottom-2.5 left-1/2 -translate-x-1/2 z-40 max-w-[98vw] flex justify-center pointer-events-auto">
       <nav
         aria-label="Application Dock"
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
-        className="flex items-end gap-2 px-3 py-1.5 rounded-[22px] bg-white/20 dark:bg-[#14151b]/45 backdrop-blur-3xl border border-white/25 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08)] select-none transition-all"
+        className="flex items-end gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-[22px] bg-white/20 dark:bg-[#14151b]/45 backdrop-blur-3xl border border-white/25 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08)] select-none transition-all max-w-full overflow-x-auto scrollbar-none"
       >
         {/* App Icons */}
         {appItems.map((item) => (

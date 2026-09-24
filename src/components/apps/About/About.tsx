@@ -36,7 +36,15 @@ export const About = () => {
         {/* Avatar with subtle glow */}
         <div className="relative shrink-0">
           <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-white/40 dark:border-white/20 shadow-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-3xl font-bold text-white">
-            AP
+            <img
+              src="/profile.png"
+              alt={profile.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+              }}
+            />
+            <span className="hidden group-[.fallback]:inline">AP</span>
           </div>
           <div className="absolute -bottom-1 -right-1 p-1 bg-emerald-500 rounded-full border-2 border-white dark:border-[#1a1b20]" title="Open to new opportunities" />
         </div>

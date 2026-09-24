@@ -68,22 +68,22 @@ export const MobileHomeScreen = () => {
   const activeApp = MOBILE_APPS.find((app) => app.id === activeAppId)
 
   return (
-    <div className="relative w-full h-full min-h-screen flex flex-col justify-between p-4 pb-6 overflow-hidden select-none bg-black">
+    <div className="relative w-full h-[100dvh] min-h-[100dvh] flex flex-col justify-between p-3 sm:p-4 pb-5 sm:pb-6 overflow-y-auto overflow-x-hidden select-none bg-black">
       {/* Dynamic Background Wallpaper */}
       <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out"
+        className="fixed inset-0 bg-cover bg-center transition-all duration-700 ease-in-out pointer-events-none"
         style={{
           backgroundImage: `url('${currentWallpaper}')`,
         }}
       />
-      <div className="absolute inset-0 bg-black/25 backdrop-blur-[1px] pointer-events-none" />
+      <div className="fixed inset-0 bg-black/25 backdrop-blur-[1px] pointer-events-none" />
 
       {/* iOS Status Bar */}
-      <div className="relative z-10 w-full flex items-center justify-between text-xs font-semibold text-white px-3 pt-2">
+      <div className="relative z-10 w-full flex items-center justify-between text-xs font-semibold text-white px-2 sm:px-3 pt-1 sm:pt-2 shrink-0">
         <span>{timeStr || '9:41'}</span>
 
         {/* Dynamic Island */}
-        <div className="w-24 h-5 bg-black rounded-full shadow-inner flex items-center justify-center">
+        <div className="w-24 sm:w-28 h-5 bg-black rounded-full shadow-inner flex items-center justify-center">
           <div className="w-2 h-2 rounded-full bg-[#141b2b] ml-12" />
         </div>
 
@@ -94,35 +94,43 @@ export const MobileHomeScreen = () => {
       </div>
 
       {/* Top iOS Profile & Clock Widget */}
-      <div className="relative z-10 mt-3 px-2">
-        <div className="p-4 rounded-3xl bg-black/40 backdrop-blur-2xl border border-white/20 text-white shadow-xl flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-xl font-bold text-white shadow-md border border-white/20 shrink-0">
-            AR
+      <div className="relative z-10 mt-2 sm:mt-3 px-1 sm:px-2 shrink-0">
+        <div className="p-3.5 sm:p-4 rounded-3xl bg-black/45 backdrop-blur-2xl border border-white/20 text-white shadow-xl flex items-center gap-3 sm:gap-4">
+          <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-md border border-white/20 shrink-0 bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-lg sm:text-xl font-bold text-white">
+            <img
+              src="/profile.png"
+              alt={profile.name}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+              }}
+            />
+            <span className="hidden group-[.fallback]:inline">AP</span>
           </div>
-          <div>
-            <h2 className="text-base font-bold leading-tight">{profile.name}</h2>
-            <p className="text-xs text-blue-300 font-medium">{profile.role}</p>
-            <p className="text-[11px] text-white/70 mt-0.5">{profile.location}</p>
+          <div className="min-w-0 flex-1">
+            <h2 className="text-sm sm:text-base font-bold leading-tight truncate">{profile.name}</h2>
+            <p className="text-xs text-blue-300 font-medium truncate">{profile.role}</p>
+            <p className="text-[11px] text-white/70 mt-0.5 truncate">{profile.location}</p>
           </div>
         </div>
       </div>
 
       {/* iOS Main App & Social Grid */}
-      <div className="relative z-10 my-auto py-5 grid grid-cols-4 gap-y-5 gap-x-3 px-2">
+      <div className="relative z-10 my-auto py-4 sm:py-5 grid grid-cols-4 gap-y-3.5 sm:gap-y-5 gap-x-2 sm:gap-x-3 px-1 sm:px-2">
         {MOBILE_APPS.map((app) => (
           <button
             key={app.id}
             onClick={() => setActiveAppId(app.id)}
-            className="flex flex-col items-center gap-1.5 active:scale-90 transition-transform focus:outline-none min-h-[44px]"
+            className="flex flex-col items-center gap-1 sm:gap-1.5 active:scale-90 transition-transform focus:outline-none min-h-[44px]"
           >
-            <div className="w-14 h-14 rounded-2xl overflow-hidden shadow-xl p-0.5 border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-xl p-0.5 border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center">
               <img
                 src={app.icon}
                 alt={app.name}
                 className="w-full h-full object-contain pointer-events-none drop-shadow"
               />
             </div>
-            <span className="text-[11px] font-medium text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+            <span className="text-[10px] sm:text-[11px] font-medium text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] truncate max-w-full text-center px-0.5">
               {app.name}
             </span>
           </button>
@@ -135,16 +143,16 @@ export const MobileHomeScreen = () => {
             href={soc.url}
             target="_blank"
             rel="noreferrer"
-            className="flex flex-col items-center gap-1.5 active:scale-90 transition-transform focus:outline-none min-h-[44px]"
+            className="flex flex-col items-center gap-1 sm:gap-1.5 active:scale-90 transition-transform focus:outline-none min-h-[44px]"
           >
-            <div className="w-14 h-14 rounded-2xl overflow-hidden shadow-xl p-0.5 border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden shadow-xl p-0.5 border border-white/20 bg-white/10 backdrop-blur-md flex items-center justify-center">
               <img
                 src={soc.icon}
                 alt={soc.name}
                 className="w-full h-full object-contain pointer-events-none drop-shadow"
               />
             </div>
-            <span className="text-[11px] font-medium text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+            <span className="text-[10px] sm:text-[11px] font-medium text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] truncate max-w-full text-center px-0.5">
               {soc.name}
             </span>
           </a>
@@ -152,13 +160,13 @@ export const MobileHomeScreen = () => {
       </div>
 
       {/* iOS Bottom Dock */}
-      <div className="relative z-10 px-2">
-        <div className="p-3 rounded-[32px] bg-black/40 backdrop-blur-3xl border border-white/25 shadow-2xl flex items-center justify-around">
+      <div className="relative z-10 px-1 sm:px-2 w-full max-w-sm mx-auto shrink-0 mt-2">
+        <div className="p-2 sm:p-3 rounded-[26px] sm:rounded-[32px] bg-black/45 backdrop-blur-3xl border border-white/25 shadow-2xl flex items-center justify-around">
           {MOBILE_APPS.slice(0, 4).map((app) => (
             <button
               key={`dock-${app.id}`}
               onClick={() => setActiveAppId(app.id)}
-              className="w-14 h-14 rounded-2xl overflow-hidden active:scale-90 transition-transform focus:outline-none flex items-center justify-center min-h-[44px]"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden active:scale-90 transition-transform focus:outline-none flex items-center justify-center min-h-[44px] min-w-[44px]"
             >
               <img
                 src={app.icon}

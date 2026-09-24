@@ -27,7 +27,7 @@ export const Desktop: React.FC<DesktopProps> = ({
   const activeAppName = activeApp?.name || 'Finder'
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden select-none bg-black flex flex-col">
+    <div className="relative w-screen h-[100dvh] min-h-[100dvh] overflow-hidden select-none bg-black flex flex-col">
       {/* Dynamic Background Wallpaper with Smooth Transitions */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out scale-[1.01]"
@@ -40,7 +40,7 @@ export const Desktop: React.FC<DesktopProps> = ({
       <div className="absolute inset-0 bg-black/10 dark:bg-black/25 pointer-events-none" />
 
       {/* Authentic MacBook Top Camera Notch */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 z-50 w-28 sm:w-32 h-[22px] bg-black rounded-b-xl flex items-center justify-center shadow-md pointer-events-none">
+      <div className="hidden lg:flex absolute top-0 left-1/2 -translate-x-1/2 z-50 w-28 sm:w-32 h-[22px] bg-black rounded-b-xl items-center justify-center shadow-md pointer-events-none">
         <div className="flex items-center gap-2.5">
           <div className="w-2.5 h-2.5 rounded-full bg-[#0a1220] border border-[#1b2538] flex items-center justify-center shadow-inner">
             <div className="w-1 h-1 rounded-full bg-[#183358]" />

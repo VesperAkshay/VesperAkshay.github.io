@@ -1,0 +1,35 @@
+:root {
+  /* Color — light mode */
+  --desktop-bg: #F5F5F7;
+  --window-bg: rgba(255, 255, 255, 0.85);
+  --menubar-bg: rgba(255, 255, 255, 0.6);
+  --dock-bg: rgba(255, 255, 255, 0.5);
+  --text-primary: #1D1D1F;
+  --text-secondary: #6E6E73;
+  --accent: #0A84FF;
+
+  /* Radii */
+  --radius-window: 12px;
+  --radius-bezel: 22px;
+  --radius-dock: 20px;
+
+  /* Shadow */
+  --shadow-window: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --shadow-window-focused: 0 30px 80px rgba(0, 0, 0, 0.45);
+
+  /* Typography */
+  --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* Motion */
+  --spring-stiffness: 300;
+  --spring-damping: 30;
+}
+
+[data-theme="dark"] {
+  --desktop-bg: #1D1D1F;
+  --window-bg: rgba(30, 30, 32, 0.85);
+  --menubar-bg: rgba(30, 30, 32, 0.6);
+  --dock-bg: rgba(30, 30, 32, 0.5);
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A6;
+}

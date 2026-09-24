@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="safariBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E7ED"/>
+    </linearGradient>
+    <linearGradient id="compassBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1DA1F2"/>
+      <stop offset="100%" stop-color="#005BBA"/>
+    </linearGradient>
+    <filter id="safariShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="url(#safariBg)" filter="url(#safariShadow)"/>
+  <rect x="8.5" y="8.5" width="111" height="111" rx="25.5" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"/>
+  <!-- Blue Compass Circle -->
+  <circle cx="64" cy="64" r="46" fill="url(#compassBg)"/>
+  <circle cx="64" cy="64" r="45" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+  <!-- Tick marks -->
+  <g stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round">
+    <line x1="64" y1="22" x2="64" y2="27"/>
+    <line x1="64" y1="101" x2="64" y2="106"/>
+    <line x1="22" y1="64" x2="27" y2="64"/>
+    <line x1="101" y1="64" x2="106" y2="64"/>
+  </g>
+  <!-- Needle -->
+  <g transform="translate(64, 64) rotate(45)">
+    <!-- Red needle (North) -->
+    <polygon points="0,-40 6,-6 0,0 -6,-6" fill="#FF3B30"/>
+    <!-- White needle (South) -->
+    <polygon points="0,40 6,6 0,0 -6,6" fill="#F4F4F6"/>
+    <circle cx="0" cy="0" r="3.5" fill="#FFFFFF"/>
+    <circle cx="0" cy="0" r="1.5" fill="#1C1C1E"/>
+  </g>
+</svg>

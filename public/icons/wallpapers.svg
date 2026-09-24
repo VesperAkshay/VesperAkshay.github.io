@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="folderBack" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="folderFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <filter id="folderShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Back Folder Flap -->
+  <path d="M12 28 C12 22 17 18 23 18 L50 18 C55 18 58 21 62 25 L68 31 C71 34 75 35 79 35 L105 35 C111 35 116 40 116 46 L116 94 C116 100 111 105 105 105 L23 105 C17 105 12 100 12 94 Z" fill="url(#folderBack)" filter="url(#folderShadow)"/>
+  <!-- Front Folder Body -->
+  <path d="M12 46 C12 40 17 36 23 36 L105 36 C111 36 116 40 116 46 L116 96 C116 102 111 107 105 107 L23 107 C17 107 12 102 12 96 Z" fill="url(#folderFront)"/>
+  <!-- Inner Picture / Wallpaper Emblem -->
+  <g transform="translate(42, 54)">
+    <rect x="0" y="0" width="44" height="32" rx="4" fill="#FFFFFF" fill-opacity="0.9" />
+    <circle cx="12" cy="10" r="4" fill="#F59E0B" />
+    <polygon points="4,26 16,14 26,24 34,16 40,26" fill="#3B82F6" />
+  </g>
+</svg>

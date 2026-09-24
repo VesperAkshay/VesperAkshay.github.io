@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="finderBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2EEF9"/>
+      <stop offset="100%" stop-color="#A5C7E6"/>
+    </linearGradient>
+    <linearGradient id="finderBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1995F7"/>
+      <stop offset="100%" stop-color="#0060DF"/>
+    </linearGradient>
+    <filter id="finderShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="url(#finderBg)" filter="url(#finderShadow)"/>
+  <rect x="8.5" y="8.5" width="111" height="111" rx="25.5" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+  <!-- Right half of face (darker blue) -->
+  <path d="M64 12 C90 12, 112 28, 112 64 C112 98, 92 116, 64 118 Z" fill="url(#finderBlue)"/>
+  <!-- Face dividing line & nose -->
+  <path d="M64 24 L64 64 L74 69 L64 74 L64 104" fill="none" stroke="#1C3857" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left Eye -->
+  <circle cx="43" cy="50" r="5" fill="#1C3857"/>
+  <!-- Right Eye -->
+  <circle cx="85" cy="50" r="5" fill="#FFFFFF"/>
+  <!-- Smile -->
+  <path d="M36 78 C46 95, 82 95, 92 78" fill="none" stroke="#1C3857" stroke-width="5" stroke-linecap="round"/>
+</svg>

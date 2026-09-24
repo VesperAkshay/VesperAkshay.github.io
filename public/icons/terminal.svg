@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#36383E"/>
+      <stop offset="100%" stop-color="#18191B"/>
+    </linearGradient>
+    <filter id="termShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="url(#termBg)" filter="url(#termShadow)"/>
+  <rect x="8.5" y="8.5" width="111" height="111" rx="25.5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <!-- Top bar dots -->
+  <circle cx="24" cy="22" r="3.5" fill="#FF5F56"/>
+  <circle cx="34" cy="22" r="3.5" fill="#FFBD2E"/>
+  <circle cx="44" cy="22" r="3.5" fill="#27C93F"/>
+  <!-- Command prompt symbol >_ -->
+  <path d="M28 50 L48 64 L28 78" fill="none" stroke="#ECEFF4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="56" y1="78" x2="80" y2="78" stroke="#ECEFF4" stroke-width="6" stroke-linecap="round"/>
+  <!-- Subtle green code line accent -->
+  <line x1="28" y1="96" x2="68" y2="96" stroke="#48BB78" stroke-width="3" stroke-linecap="round" stroke-opacity="0.8"/>
+</svg>

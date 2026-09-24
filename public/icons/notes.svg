@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="notesBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDF7"/>
+      <stop offset="100%" stop-color="#EBE2D0"/>
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFDA44"/>
+      <stop offset="100%" stop-color="#EAA607"/>
+    </linearGradient>
+    <filter id="notesShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="url(#notesBg)" filter="url(#notesShadow)"/>
+  <!-- Top header band -->
+  <path d="M8 34 C8 20, 20 8, 34 8 L94 8 C108 8, 120 20, 120 34 L120 40 L8 40 Z" fill="url(#headerGrad)"/>
+  <!-- Perforation / stitched effect line -->
+  <line x1="8" y1="40" x2="120" y2="40" stroke="#C49216" stroke-width="1.5" stroke-dasharray="3 2"/>
+  <!-- Notepad lines -->
+  <line x1="24" y1="56" x2="104" y2="56" stroke="#D8C7A5" stroke-width="2"/>
+  <line x1="24" y1="72" x2="104" y2="72" stroke="#D8C7A5" stroke-width="2"/>
+  <line x1="24" y1="88" x2="104" y2="88" stroke="#D8C7A5" stroke-width="2"/>
+  <line x1="24" y1="104" x2="80" y2="104" stroke="#D8C7A5" stroke-width="2"/>
+  <!-- Stylized Pencil / stylus -->
+  <g transform="translate(68, 54) rotate(-35)">
+    <rect x="0" y="0" width="10" height="42" rx="3" fill="#E8A735"/>
+    <polygon points="0,42 10,42 5,52" fill="#F8E5B8"/>
+    <polygon points="3,48 7,48 5,52" fill="#2C2C2E"/>
+    <rect x="0" y="0" width="10" height="8" rx="2" fill="#7C7C80"/>
+  </g>
+  <rect x="8.5" y="8.5" width="111" height="111" rx="25.5" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+</svg>

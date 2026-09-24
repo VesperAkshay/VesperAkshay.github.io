@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="photosBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F2F3F7"/>
+    </linearGradient>
+    <filter id="photosShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="26" fill="url(#photosBg)" filter="url(#photosShadow)"/>
+  <rect x="8.5" y="8.5" width="111" height="111" rx="25.5" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"/>
+  <!-- Multi-colored overlapping petals -->
+  <g transform="translate(64, 64) scale(0.95)" opacity="0.9">
+    <!-- 8 petals at 45 deg intervals -->
+    <!-- Petal shape: ellipse rotated from bottom/center -->
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#FF3B30" opacity="0.85" />
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#FF9500" opacity="0.85" transform="rotate(45)" />
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#FFCC00" opacity="0.85" transform="rotate(90)" />
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#34C759" opacity="0.85" transform="rotate(135)" />
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#00C7BE" opacity="0.85" transform="rotate(180)" />
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#007AFF" opacity="0.85" transform="rotate(225)" />
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#5856D6" opacity="0.85" transform="rotate(270)" />
+    <ellipse cx="0" cy="-22" rx="10" ry="19" fill="#AF52DE" opacity="0.85" transform="rotate(315)" />
+    <circle cx="0" cy="0" r="7" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+</svg>

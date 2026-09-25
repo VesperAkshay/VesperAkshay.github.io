@@ -118,6 +118,19 @@ export const Desktop: React.FC<DesktopProps> = ({
               Resume.pdf
             </span>
           </div>
+
+          {/* 2048 Dev Game */}
+          <div
+            onDoubleClick={() => open('game2048')}
+            className="flex flex-col items-center gap-1 group cursor-pointer p-1 rounded hover:bg-white/10 active:bg-blue-600/30 transition-colors w-20 text-center"
+          >
+            <div className="w-12 h-12 flex items-center justify-center">
+              <img src="/icons/game.svg" alt="2048 Dev" className="w-11 h-11 object-contain drop-shadow-lg" />
+            </div>
+            <span className="text-[11px] font-medium text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] px-1.5 py-0.5 rounded group-hover:bg-blue-600 truncate max-w-full">
+              2048 Dev
+            </span>
+          </div>
         </div>
 
         {/* Windows and Active Content */}

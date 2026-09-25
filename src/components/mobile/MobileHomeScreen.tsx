@@ -10,6 +10,7 @@ import { Photos } from '../apps/Photos/Photos'
 import { Preview } from '../apps/Preview/Preview'
 import { Safari } from '../apps/Safari/Safari'
 import { Wallpapers } from '../apps/Wallpapers/Wallpapers'
+import { Game2048 } from '../apps/Game2048/Game2048'
 import { useWallpaperStore } from '../../store/wallpaperStore'
 
 export const MOBILE_APPS = [
@@ -21,6 +22,7 @@ export const MOBILE_APPS = [
   { id: 'preview', name: 'Resume', icon: '/icons/preview.svg', component: <Preview /> },
   { id: 'safari', name: 'Safari', icon: '/icons/safari.svg', component: <Safari /> },
   { id: 'wallpapers', name: 'Wallpapers', icon: '/icons/wallpapers.svg', component: <Wallpapers /> },
+  { id: 'game2048', name: '2048 Dev', icon: '/icons/game.svg', component: <Game2048 /> },
 ]
 
 export const MOBILE_SOCIALS = [

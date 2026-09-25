@@ -13,6 +13,7 @@ import { Photos } from './components/apps/Photos/Photos'
 import { Preview } from './components/apps/Preview/Preview'
 import { Safari } from './components/apps/Safari/Safari'
 import { Wallpapers } from './components/apps/Wallpapers/Wallpapers'
+import { Game2048 } from './components/apps/Game2048/Game2048'
 
 export const APP_REGISTRY = [
   {
@@ -78,6 +79,15 @@ export const APP_REGISTRY = [
     initialPosition: { x: 150, y: 50 },
     initialSize: { width: 800, height: 500 },
     component: <Safari />,
+  },
+  {
+    id: 'game2048',
+    title: '2048 — Dev Evolution',
+    icon: '/icons/game.svg',
+    initialPosition: { x: 200, y: 40 },
+    initialSize: { width: 440, height: 630 },
+    minSize: { width: 360, height: 520 },
+    component: <Game2048 />,
   },
 ]
 

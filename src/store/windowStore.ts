@@ -55,6 +55,10 @@ const DEFAULT_WINDOWS: Record<string, Partial<WindowState>> = {
     position: { x: 170, y: 45 },
     size: { width: 840, height: 540 },
   },
+  game2048: {
+    position: { x: 200, y: 40 },
+    size: { width: 440, height: 630 },
+  },
 }
 
 export const useWindowStore = create<WindowStore>((set, get) => ({

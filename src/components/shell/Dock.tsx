@@ -13,6 +13,7 @@ export const DOCK_APPS: Omit<DockItemData, 'isOpen'>[] = [
   { id: 'preview', name: 'Resume', icon: '/icons/preview.svg' },
   { id: 'safari', name: 'Safari', icon: '/icons/safari.svg' },
   { id: 'wallpapers', name: 'Wallpapers', icon: '/icons/wallpapers.svg' },
+  { id: 'game2048', name: '2048 Dev', icon: '/icons/game.svg' },
 ]
 
 export const DOCK_SOCIALS: DockItemData[] = [

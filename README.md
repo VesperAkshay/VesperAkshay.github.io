@@ -25,6 +25,14 @@ An authentic, ultra-smooth macOS Sonoma/Sequoia desktop experience and interacti
 - **Dock & Menu Bar**:
   - Realistic physics-based dock magnification powered by Framer Motion.
   - Live clock, Apple menu, and Control Center toggles.
+- **Multi-OS Desktop Switcher (Bottom-Left Drawer)**:
+  - **Clickable Floating Drawer**: Bottom-left glassmorphism pill badge toggles a full desktop OS selector drawer.
+  - **4 Authentic Desktop Environments**:
+    - 🍎 **macOS Sequoia**: Frosted glass MenuBar, Apple camera notch, traffic light window controls, parabolic magnification Dock.
+    - 🪟 **Windows 11**: Centered Fluent Taskbar, functional Windows Start Menu with search and pinned tiles, system tray clock, and `─ □ ✕` window controls (with red hover).
+    - 🐧 **Ubuntu Linux**: Ubuntu TopBar with "Activities" overview, center date/clock, Yaru status indicators, and left vertical Ubuntu Dash launcher with signature orange running dots.
+    - 🤖 **Android 15**: Material You status bar (5G/Wi-Fi/Battery), "At a Glance" widget, big clock widget, Google search pill, home screen app grid, and gesture pill bar.
+  - **Seamless App Persistence**: Every app (Finder, Terminal, 2048 Dev, Resume, Wallpapers, etc.) remains fully active, focused, and playable across all 4 operating systems!
 - **Responsive Mobile Experience**:
   - Native iOS-inspired mobile home screen with app grid, status bar, dynamic island, and swipeable sheets.
 

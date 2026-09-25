@@ -1,27 +1,55 @@
 export interface WallpaperItem {
   id: string
   name: string
-  category: 'F1 Racing' | 'Flowers' | 'Clouds & Sky' | 'Aesthetic' | 'macOS Official'
+  category: 'F1 Racing' | 'Flowers' | 'Clouds & Sky' | 'Aesthetic' | 'macOS Official' | 'OS Wallpapers'
   url: string
   thumbnail: string
   aspect?: string
 }
 
 export const WALLPAPERS: WallpaperItem[] = [
-  // macOS Official
+  // OS Official
   {
     id: 'sequoia-dark',
     name: 'macOS Sequoia (Dark 4K)',
-    category: 'macOS Official',
+    category: 'OS Wallpapers',
     url: '/wallpapers/sequoia-dark.jpg',
     thumbnail: '/wallpapers/sequoia-dark.jpg',
   },
   {
     id: 'sequoia-light',
     name: 'macOS Sequoia (Light 4K)',
-    category: 'macOS Official',
+    category: 'OS Wallpapers',
     url: '/wallpapers/sequoia-light.jpg',
     thumbnail: '/wallpapers/sequoia-light.jpg',
+  },
+  {
+    id: 'windows-bloom',
+    name: 'Windows 11 Bloom (Light 4K)',
+    category: 'OS Wallpapers',
+    url: '/wallpapers/windows-bloom.jpg',
+    thumbnail: '/wallpapers/windows-bloom.jpg',
+  },
+  {
+    id: 'windows-dark',
+    name: 'Windows 11 Bloom (Dark 4K)',
+    category: 'OS Wallpapers',
+    url: '/wallpapers/windows-dark.jpg',
+    thumbnail: '/wallpapers/windows-dark.jpg',
+  },
+  {
+    id: 'ubuntu-aubergine',
+    name: 'Ubuntu Linux Aubergine (4K)',
+    category: 'OS Wallpapers',
+    url: '/wallpapers/ubuntu-aubergine.jpg',
+    thumbnail: '/wallpapers/ubuntu-aubergine.jpg',
+  },
+  {
+    id: 'android-material',
+    name: 'Android 15 Material You (4K)',
+    category: 'OS Wallpapers',
+    url: '/wallpapers/android-material.png',
+    thumbnail: '/wallpapers/android-material.png',
   },
 
   // F1 Racing

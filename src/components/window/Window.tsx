@@ -2,6 +2,9 @@ import React, { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TrafficLights } from './TrafficLights'
 import { useWindowStore } from '../../store/windowStore'
+import { useOSStore } from '../../store/osStore'
+import { getOSAppMeta } from '../../data/osApps'
+import { OSAppIcon } from '../shell/OSAppIcon'
 
 export interface WindowProps {
   id: string
@@ -17,7 +20,7 @@ export interface WindowProps {
 export const Window: React.FC<WindowProps> = ({
   id,
   title,
-  icon,
+  icon: _icon,
   initialPosition = { x: 100, y: 50 },
   initialSize = { width: 680, height: 460 },
   minSize = { width: 360, height: 240 },
@@ -32,6 +35,9 @@ export const Window: React.FC<WindowProps> = ({
   const toggleMaximize = useWindowStore((state) => state.toggleMaximize)
   const updatePosition = useWindowStore((state) => state.updatePosition)
   const updateSize = useWindowStore((state) => state.updateSize)
+  const currentOS = useOSStore((state) => state.currentOS)
+  const appMeta = getOSAppMeta(id, currentOS)
+  const currentTitle = appMeta.windowTitle || title
 
   const isFocused = focusedId === id
   const isOpen = windowState?.isOpen ?? false
@@ -312,65 +318,251 @@ export const Window: React.FC<WindowProps> = ({
           style={{
             zIndex,
             position: 'absolute',
-            top: isMaximized ? 4 : currentPos.y,
-            left: isMaximized ? 8 : currentPos.x,
-            width: isMaximized ? 'calc(100% - 16px)' : `${size.width}px`,
-            height: isMaximized ? 'calc(100% - 76px)' : `${size.height}px`,
-            maxWidth: 'calc(100vw - 16px)',
-            maxHeight: 'calc(100vh - 80px)',
+            top: isMaximized
+              ? currentOS === 'windows'
+                ? 0
+                : currentOS === 'linux'
+                ? 28
+                : currentOS === 'android'
+                ? 24
+                : 4
+              : currentPos.y,
+            left: isMaximized
+              ? currentOS === 'windows'
+                ? 0
+                : currentOS === 'linux'
+                ? 60
+                : currentOS === 'android'
+                ? 8
+                : 8
+              : currentPos.x,
+            width: isMaximized
+              ? currentOS === 'windows'
+                ? '100%'
+                : currentOS === 'linux'
+                ? 'calc(100% - 60px)'
+                : 'calc(100% - 16px)'
+              : `${size.width}px`,
+            height: isMaximized
+              ? currentOS === 'windows'
+                ? 'calc(100% - 48px)'
+                : currentOS === 'linux'
+                ? 'calc(100% - 28px)'
+                : currentOS === 'android'
+                ? 'calc(100% - 40px)'
+                : 'calc(100% - 76px)'
+              : `${size.height}px`,
+            maxWidth: currentOS === 'windows' && isMaximized ? '100vw' : 'calc(100vw - 16px)',
+            maxHeight: currentOS === 'windows' && isMaximized ? 'calc(100vh - 48px)' : 'calc(100vh - 80px)',
             minWidth: `${Math.min(minSize.width, typeof window !== 'undefined' ? window.innerWidth - 20 : 320)}px`,
             minHeight: `${minSize.height}px`,
             transformOrigin: `${pinchX}% 100%`,
             willChange: isDragging || isResizing ? 'transform' : 'auto',
           }}
-          className={`rounded-window overflow-hidden flex flex-col transition-shadow duration-200 select-none ${
+          className={`overflow-hidden flex flex-col transition-shadow duration-200 select-none ${
+            currentOS === 'windows'
+              ? 'rounded-xl ring-1 ring-white/15'
+              : currentOS === 'linux'
+              ? 'rounded-xl ring-1 ring-white/10'
+              : currentOS === 'android'
+              ? 'rounded-3xl ring-1 ring-white/20'
+              : 'rounded-window ring-1 ring-black/10 dark:ring-white/10'
+          } ${
             isDragging
               ? 'shadow-[0_28px_65px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.2)] scale-[1.002]'
               : isFocused
-              ? 'shadow-window-focused ring-1 ring-white/20'
-              : 'shadow-window opacity-95 ring-1 ring-black/10 dark:ring-white/10'
+              ? 'shadow-window-focused'
+              : 'shadow-window opacity-95'
           }`}
         >
-          {/* Frosted Glass Window Header / Title Bar */}
-          <div
-            onPointerDown={handleTitlePointerDown}
-            onPointerMove={handleTitlePointerMove}
-            onPointerUp={handleTitlePointerUp}
-            onPointerCancel={handleTitlePointerUp}
-            onDoubleClick={() => toggleMaximize(id)}
-            className={`h-10 px-3.5 flex items-center justify-between select-none border-b transition-colors ${
-              isDragging ? 'cursor-grabbing' : 'cursor-grab'
-            } ${
-              isFocused
-                ? 'bg-white/75 dark:bg-[#222328]/85 border-black/10 dark:border-white/10'
-                : 'bg-white/60 dark:bg-[#1a1b1f]/75 border-black/5 dark:border-white/5'
-            } backdrop-blur-2xl`}
-          >
-            {/* Left: Traffic Lights */}
+          {/* OS-Adaptive Window Header / Title Bar */}
+          {currentOS === 'windows' ? (
+            /* Windows 11 Fluent Header */
             <div
-              data-no-drag
-              onPointerDown={(e) => e.stopPropagation()}
-              onMouseDown={(e) => e.stopPropagation()}
-              onDoubleClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-2 w-20 shrink-0 pointer-events-auto z-20"
+              onPointerDown={handleTitlePointerDown}
+              onPointerMove={handleTitlePointerMove}
+              onPointerUp={handleTitlePointerUp}
+              onPointerCancel={handleTitlePointerUp}
+              onDoubleClick={() => toggleMaximize(id)}
+              className={`h-9 pl-3 pr-0 flex items-center justify-between select-none border-b transition-colors font-sans ${
+                isDragging ? 'cursor-grabbing' : 'cursor-grab'
+              } ${
+                isFocused
+                  ? 'bg-[#1b2232]/95 border-white/10 text-white'
+                  : 'bg-[#121620]/90 border-white/5 text-slate-300'
+              } backdrop-blur-2xl`}
             >
-              <TrafficLights
-                onClose={handleClose}
-                onMinimize={handleMinimize}
-                onMaximize={() => toggleMaximize(id)}
-                isFocused={isFocused}
-              />
-            </div>
+              {/* Left: App Icon & Title */}
+              <div className="flex items-center gap-2 text-xs font-normal text-slate-200 truncate min-w-0 pointer-events-none">
+                <OSAppIcon id={id} os="windows" className="w-4 h-4 shrink-0 drop-shadow" />
+                <span className="truncate">{currentTitle}</span>
+              </div>
 
-            {/* Center: Window Title and Icon */}
-            <div className="flex items-center gap-2 text-xs font-medium text-slate-800 dark:text-slate-200 truncate min-w-0 mx-2 pointer-events-none">
-              {icon && <img src={icon} alt="" className="w-4 h-4 object-contain pointer-events-none shrink-0" />}
-              <span className="truncate">{title}</span>
+              {/* Right: Windows 11 Controls (─ □ ✕) */}
+              <div
+                data-no-drag
+                onPointerDown={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                className="flex items-stretch h-full pointer-events-auto z-20"
+              >
+                <button
+                  onClick={handleMinimize}
+                  className="w-11 h-full flex items-center justify-center hover:bg-white/10 text-slate-300 hover:text-white transition-colors text-sm font-sans"
+                  title="Minimize"
+                >
+                  ─
+                </button>
+                <button
+                  onClick={() => toggleMaximize(id)}
+                  className="w-11 h-full flex items-center justify-center hover:bg-white/10 text-slate-300 hover:text-white transition-colors text-xs font-sans"
+                  title={isMaximized ? 'Restore Down' : 'Maximize'}
+                >
+                  {isMaximized ? '❐' : '□'}
+                </button>
+                <button
+                  onClick={handleClose}
+                  className="w-11 h-full flex items-center justify-center hover:bg-[#e81123] text-slate-300 hover:text-white transition-colors text-sm font-light"
+                  title="Close"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
+          ) : currentOS === 'linux' ? (
+            /* Ubuntu Yaru Header */
+            <div
+              onPointerDown={handleTitlePointerDown}
+              onPointerMove={handleTitlePointerMove}
+              onPointerUp={handleTitlePointerUp}
+              onPointerCancel={handleTitlePointerUp}
+              onDoubleClick={() => toggleMaximize(id)}
+              className={`h-9 px-3.5 flex items-center justify-between select-none border-b transition-colors font-sans ${
+                isDragging ? 'cursor-grabbing' : 'cursor-grab'
+              } ${
+                isFocused
+                  ? 'bg-[#2b2b2b] border-[#181818] text-white'
+                  : 'bg-[#202020] border-[#141414] text-stone-300'
+              } backdrop-blur-2xl`}
+            >
+              {/* Left: Ubuntu App Title & Icon */}
+              <div className="flex items-center gap-2 text-xs font-bold text-white truncate min-w-0 pointer-events-none">
+                <OSAppIcon id={id} os="linux" className="w-4 h-4 shrink-0 drop-shadow" />
+                <span className="truncate">{currentTitle}</span>
+              </div>
 
-            {/* Right: Balanced Spacer for centering */}
-            <div className="w-20 shrink-0" />
-          </div>
+              {/* Right: Yaru Circular Window Buttons */}
+              <div
+                data-no-drag
+                onPointerDown={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                className="flex items-center gap-2 pointer-events-auto z-20"
+              >
+                <button
+                  onClick={handleMinimize}
+                  className="w-5 h-5 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-[10px] text-white transition-colors"
+                  title="Minimize"
+                >
+                  ─
+                </button>
+                <button
+                  onClick={() => toggleMaximize(id)}
+                  className="w-5 h-5 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-[10px] text-white transition-colors"
+                  title="Maximize"
+                >
+                  {isMaximized ? '❐' : '□'}
+                </button>
+                <button
+                  onClick={handleClose}
+                  className="w-5 h-5 rounded-full bg-[#E95420]/90 hover:bg-[#E95420] flex items-center justify-center text-[10px] text-white transition-colors shadow-sm"
+                  title="Close"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          ) : currentOS === 'android' ? (
+            /* Android Tablet Header */
+            <div
+              onPointerDown={handleTitlePointerDown}
+              onPointerMove={handleTitlePointerMove}
+              onPointerUp={handleTitlePointerUp}
+              onPointerCancel={handleTitlePointerUp}
+              onDoubleClick={() => toggleMaximize(id)}
+              className={`h-10 px-4 flex items-center justify-between select-none border-b transition-colors font-sans ${
+                isDragging ? 'cursor-grabbing' : 'cursor-grab'
+              } ${
+                isFocused
+                  ? 'bg-[#182030]/95 border-white/10 text-white'
+                  : 'bg-[#10141f]/85 border-white/5 text-slate-300'
+              } backdrop-blur-2xl`}
+            >
+              {/* Left: App icon and title */}
+              <div className="flex items-center gap-2 text-xs font-semibold text-white truncate min-w-0 pointer-events-none">
+                <OSAppIcon id={id} os="android" className="w-4 h-4 shrink-0 drop-shadow" />
+                <span className="truncate">{currentTitle}</span>
+              </div>
+
+              {/* Center: Android pill drag handle */}
+              <div className="w-12 h-1 bg-white/35 rounded-full pointer-events-none" />
+
+              {/* Right: Close button */}
+              <div
+                data-no-drag
+                onPointerDown={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                className="pointer-events-auto z-20"
+              >
+                <button
+                  onClick={handleClose}
+                  className="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs text-white transition-colors"
+                  title="Close"
+                >
+                  ✕
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* macOS Sequoia Frosted Glass Header */
+            <div
+              onPointerDown={handleTitlePointerDown}
+              onPointerMove={handleTitlePointerMove}
+              onPointerUp={handleTitlePointerUp}
+              onPointerCancel={handleTitlePointerUp}
+              onDoubleClick={() => toggleMaximize(id)}
+              className={`h-10 px-3.5 flex items-center justify-between select-none border-b transition-colors ${
+                isDragging ? 'cursor-grabbing' : 'cursor-grab'
+              } ${
+                isFocused
+                  ? 'bg-white/75 dark:bg-[#222328]/85 border-black/10 dark:border-white/10'
+                  : 'bg-white/60 dark:bg-[#1a1b1f]/75 border-black/5 dark:border-white/5'
+              } backdrop-blur-2xl`}
+            >
+              {/* Left: Traffic Lights */}
+              <div
+                data-no-drag
+                onPointerDown={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                onDoubleClick={(e) => e.stopPropagation()}
+                className="flex items-center gap-2 w-20 shrink-0 pointer-events-auto z-20"
+              >
+                <TrafficLights
+                  onClose={handleClose}
+                  onMinimize={handleMinimize}
+                  onMaximize={() => toggleMaximize(id)}
+                  isFocused={isFocused}
+                />
+              </div>
+
+              {/* Center: Window Title and Icon */}
+              <div className="flex items-center gap-2 text-xs font-medium text-slate-800 dark:text-slate-200 truncate min-w-0 mx-2 pointer-events-none">
+                <OSAppIcon id={id} os="macos" className="w-4 h-4 shrink-0 drop-shadow" />
+                <span className="truncate">{currentTitle}</span>
+              </div>
+
+              {/* Right: Balanced Spacer for centering */}
+              <div className="w-20 shrink-0" />
+            </div>
+          )}
 
           {/* Window Body Surface */}
           <div className="relative flex-1 bg-white/90 dark:bg-[#191a20]/95 backdrop-blur-xl text-slate-900 dark:text-slate-100 overflow-hidden flex flex-col">

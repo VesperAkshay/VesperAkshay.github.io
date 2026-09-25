@@ -11,7 +11,7 @@ export const Wallpapers = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [searchQuery, setSearchQuery] = useState('')
 
-  const categories = ['All', 'F1 Racing', 'Flowers', 'Clouds & Sky', 'Aesthetic', 'macOS Official']
+  const categories = ['All', 'OS Wallpapers', 'F1 Racing', 'Flowers', 'Clouds & Sky', 'Aesthetic']
 
   const filteredWallpapers = useMemo(() => {
     return WALLPAPERS.filter((item) => {

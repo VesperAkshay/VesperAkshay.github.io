@@ -3,6 +3,7 @@ import { projects } from '../../../data/projects'
 import type { Project } from '../../../data/projects'
 import { ProjectCard } from './ProjectCard'
 import { ProjectDetail } from './ProjectDetail'
+import { useOSStore } from '../../../store/osStore'
 import {
   Folder,
   LayoutGrid,
@@ -17,10 +18,20 @@ import {
 } from 'lucide-react'
 
 export const Finder = () => {
+  const currentOS = useOSStore((state) => state.currentOS)
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [searchQuery, setSearchQuery] = useState('')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
   const [activeProject, setActiveProject] = useState<Project | null>(null)
+
+  const rootDiskName =
+    currentOS === 'windows'
+      ? 'This PC (C:)'
+      : currentOS === 'linux'
+      ? 'Home'
+      : currentOS === 'android'
+      ? 'Internal Storage'
+      : 'Macintosh HD'
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
@@ -111,7 +122,7 @@ export const Finder = () => {
           <div className="mt-1 space-y-0.5">
             <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-600 dark:text-slate-400">
               <HardDrive className="w-3.5 h-3.5" />
-              <span>Macintosh HD</span>
+              <span>{rootDiskName}</span>
             </div>
           </div>
         </div>
@@ -141,7 +152,7 @@ export const Finder = () => {
 
             {/* Breadcrumb */}
             <span className="text-xs font-medium ml-2 text-slate-600 dark:text-slate-400">
-              Macintosh HD &gt; Projects {activeProject ? `> ${activeProject.title}` : ''}
+              {rootDiskName} &gt; Projects {activeProject ? `> ${activeProject.title}` : ''}
             </span>
           </div>
 

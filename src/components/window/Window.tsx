@@ -73,6 +73,13 @@ export const Window: React.FC<WindowProps> = ({
     minimize(id)
   }
 
+  // Reset lastActionRef to open when window is active
+  useEffect(() => {
+    if (isOpen && !isMinimized) {
+      lastActionRef.current = 'open'
+    }
+  }, [isOpen, isMinimized])
+
   // Listen for absorb events to keep lastActionRef in sync
   useEffect(() => {
     const handleAbsorb = (e: Event) => {
@@ -102,6 +109,12 @@ export const Window: React.FC<WindowProps> = ({
 
   // Native pointer-capture window dragging for 100% fluid 120fps tracking
   const handleTitlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // If the click originated from a button, traffic light, or interactive element, DO NOT drag
+    const target = e.target as HTMLElement | null
+    if (target?.closest('button') || target?.closest('[data-no-drag]')) {
+      return
+    }
+
     if (e.button !== 0 || isMaximized) return
     focus(id)
 
@@ -334,7 +347,13 @@ export const Window: React.FC<WindowProps> = ({
             } backdrop-blur-2xl`}
           >
             {/* Left: Traffic Lights */}
-            <div className="flex items-center gap-2 w-20 shrink-0">
+            <div
+              data-no-drag
+              onPointerDown={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+              onDoubleClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-2 w-20 shrink-0 pointer-events-auto z-20"
+            >
               <TrafficLights
                 onClose={handleClose}
                 onMinimize={handleMinimize}

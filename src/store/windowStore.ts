@@ -15,9 +15,13 @@ export interface WindowStore {
   focusedId: string | null
   open: (id: string, initialConfig?: Partial<WindowState>) => void
   close: (id: string) => void
+  closeAll: () => void
   minimize: (id: string) => void
+  restoreAll: () => void
   toggleMaximize: (id: string) => void
   focus: (id: string) => void
+  centerWindow: (id: string) => void
+  cascadeWindows: () => void
   updatePosition: (id: string, pos: { x: number; y: number }) => void
   updateSize: (id: string, size: { width: number; height: number }) => void
 }
@@ -123,6 +127,62 @@ export const useWindowStore = create<WindowStore>((set, get) => ({
       windows: updatedWindows,
       focusedId: nextFocusedId,
     })
+  },
+
+  closeAll: () => {
+    const { windows } = get()
+    const updated = { ...windows }
+    Object.keys(updated).forEach((id) => {
+      updated[id] = { ...updated[id], isOpen: false, isMinimized: false }
+    })
+    set({ windows: updated, focusedId: null })
+  },
+
+  restoreAll: () => {
+    const { windows } = get()
+    const updated = { ...windows }
+    let lastId: string | null = null
+    Object.keys(updated).forEach((id) => {
+      if (updated[id].isOpen) {
+        updated[id] = { ...updated[id], isMinimized: false }
+        lastId = id
+      }
+    })
+    set({ windows: updated, focusedId: lastId })
+  },
+
+  centerWindow: (id) => {
+    const { windows } = get()
+    const target = windows[id]
+    if (!target) return
+    const screenW = typeof window !== 'undefined' ? window.innerWidth : 1200
+    const screenH = typeof window !== 'undefined' ? window.innerHeight : 800
+    const posX = Math.max(20, (screenW - target.size.width) / 2)
+    const posY = Math.max(30, (screenH - target.size.height) / 2)
+    set({
+      windows: {
+        ...windows,
+        [id]: {
+          ...target,
+          position: { x: posX, y: posY },
+          isMaximized: false,
+        },
+      },
+    })
+  },
+
+  cascadeWindows: () => {
+    const { windows } = get()
+    const updated = { ...windows }
+    const active = Object.values(updated).filter((w) => w.isOpen && !w.isMinimized)
+    active.forEach((win, index) => {
+      updated[win.id] = {
+        ...win,
+        position: { x: 70 + index * 36, y: 35 + index * 30 },
+        isMaximized: false,
+      }
+    })
+    set({ windows: updated })
   },
 
   minimize: (id) => {

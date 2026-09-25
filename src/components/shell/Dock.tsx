@@ -49,8 +49,14 @@ export const Dock = () => {
   const handleAppClick = (id: string) => {
     const win = windows[id]
     if (win?.isOpen && !win.isMinimized && focusedId === id) {
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('dock-icon-absorb', { detail: { id, action: 'minimize' } }))
+      }
       minimize(id)
     } else {
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('dock-icon-absorb', { detail: { id, action: 'open' } }))
+      }
       open(id)
     }
   }

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useTransform, useSpring } from 'framer-motion'
 import type { MotionValue } from 'framer-motion'
 
@@ -20,7 +20,23 @@ interface DockIconProps {
 export const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, onClick }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [isBouncing, setIsBouncing] = useState(false)
+  const [isAbsorbing, setIsAbsorbing] = useState(false)
+  const [absorbAction, setAbsorbAction] = useState<'minimize' | 'open'>('minimize')
   const iconRef = useRef<HTMLDivElement>(null)
+
+  // Listen for window minimize/open absorption events
+  useEffect(() => {
+    const handleAbsorb = (e: Event) => {
+      const customEvent = e as CustomEvent<{ id: string; action: 'minimize' | 'open' | 'close' }>
+      if (customEvent.detail && customEvent.detail.id === item.id) {
+        setAbsorbAction(customEvent.detail.action === 'minimize' ? 'minimize' : 'open')
+        setIsAbsorbing(true)
+        setTimeout(() => setIsAbsorbing(false), 550)
+      }
+    }
+    window.addEventListener('dock-icon-absorb', handleAbsorb)
+    return () => window.removeEventListener('dock-icon-absorb', handleAbsorb)
+  }, [item.id])
 
   // Distance from cursor to icon center
   const distance = useTransform(mouseX, (val) => {
@@ -53,6 +69,7 @@ export const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, onClick }) => 
   return (
     <motion.div
       ref={iconRef}
+      id={`dock-icon-${item.id}`}
       style={{ width }}
       className="relative flex flex-col items-center group focus:outline-none origin-bottom select-none"
       onMouseEnter={() => setIsHovered(true)}
@@ -87,6 +104,18 @@ export const DockIcon: React.FC<DockIconProps> = ({ item, mouseX, onClick }) => 
                 y: [0, -22, 0, -12, 0, -5, 0],
                 transition: { duration: 0.85, ease: 'easeInOut' },
               }
+            : isAbsorbing
+            ? absorbAction === 'minimize'
+              ? {
+                  scale: [1, 1, 1.22, 0.92, 1.05, 1],
+                  filter: ['brightness(1)', 'brightness(1)', 'brightness(1.45)', 'brightness(1.1)', 'brightness(1)'],
+                  transition: { duration: 0.5, times: [0, 0.32, 0.62, 0.8, 1], ease: 'easeOut' },
+                }
+              : {
+                  scale: [1, 1.25, 0.92, 1.08, 1],
+                  filter: ['brightness(1)', 'brightness(1.5)', 'brightness(1)'],
+                  transition: { duration: 0.5, ease: 'easeOut' },
+                }
             : undefined
         }
         aria-label={item.name}
